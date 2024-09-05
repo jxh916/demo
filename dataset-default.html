@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+</head>
+
+<body>
+    <style>
+        #container {
+            height: 100%;
+            overflow-y: scroll;
+            white-space: nowrap;
+        }
+
+        .chart {
+            display: inline-block;
+            width: 800px;
+            user-select: none;
+            -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+            position: relative;
+            height: 600px
+        }
+    </style>
+    <div id="container">
+        <div id="chart" class="chart"></div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+    <script>
+        var chartDom = document.getElementById('chart');
+        var myChart = echarts.init(chartDom, null, {
+            renderer: 'canvas',
+            useDirtyRect: false
+        });
+
+        // var option = {
+        //     legend: [
+        //         {
+        //             data: ['2012', '2013', '2014', '2015'], // 控制整个图表的图例项
+        //             selectedMode: 'multiple', // 允许多选
+        //             top: 'top' // 图例位置
+        //         },
+        //         {
+        //             data: ['Milk Tea', 'Matcha Latte', 'Cheese Cocoa', 'Walnut Brownie'], // 控制图表项的图例项
+        //             selectedMode: 'multiple', // 允许多选
+        //             left: 'left', // 图例位置
+        //             orient: 'vertical' // 垂直排列
+        //         }
+        //     ],
+        //     tooltip: {
+        //         trigger: 'item'
+        //     },
+        //     dataset: {
+        //         source: [
+        //             ['product', '2012', '2013', '2014', '2015', '2016', '2017'],
+        //             ['Milk Tea', 86.5, 92.1, 85.7, 83.1, 73.4, 55.1],
+        //             ['Matcha Latte', 41.1, 30.4, 65.1, 53.3, 83.8, 98.7],
+        //             ['Cheese Cocoa', 24.1, 67.2, 79.5, 86.4, 65.2, 82.5],
+        //             ['Walnut Brownie', 55.2, 67.1, 69.2, 72.4, 53.9, 39.1]
+        //         ]
+        //     },
+        //     series: [
+        //         {
+        //             name: '2012', // 系列名称
+        //             type: 'pie',
+        //             radius: '50%',
+        //             center: ['50%', '25%'], // 纵向排列
+        //             encode: {
+        //                 itemName: 'product',
+        //                 value: '2012'
+        //             }
+        //         },
+        //         {
+        //             name: '2013', // 系列名称
+        //             type: 'pie',
+        //             radius: '50%',
+        //             center: ['50%', '75%'], // 纵向排列
+        //             encode: {
+        //                 itemName: 'product',
+        //                 value: '2013'
+        //             }
+        //         },
+        //         {
+        //             name: '2014', // 系列名称
+        //             type: 'pie',
+        //             radius: '50%',
+        //             center: ['50%', '125%'], // 纵向排列
+        //             encode: {
+        //                 itemName: 'product',
+        //                 value: '2014'
+        //             }
+        //         },
+        //         {
+        //             name: '2015', // 系列名称
+        //             type: 'pie',
+        //             radius: '50%',
+        //             center: ['50%', '175%'], // 纵向排列
+        //             encode: {
+        //                 itemName: 'product',
+        //                 value: '2015'
+        //             }
+        //         }
+        //     ]
+        // };
+        var option = {
+            legend: {},
+            tooltip: {},
+            dataset: {
+                source: [
+                    ['product', '2012', '2013', '2014', '2015', '2016', '2017'],
+                    ['Milk Tea', 86.5, 92.1, 85.7, 83.1, 73.4, 55.1],
+                    ['Matcha Latte', 41.1, 30.4, 65.1, 53.3, 83.8, 98.7],
+                    ['Cheese Cocoa', 24.1, 67.2, 79.5, 86.4, 65.2, 82.5],
+                    ['Walnut Brownie', 55.2, 67.1, 69.2, 72.4, 53.9, 39.1]
+                ]
+            },
+            series: [
+                {
+                    type: 'pie',
+                    radius: '10%',
+                    center: ['20%', '30%']
+                    // No encode specified, by default, it is '2012'.
+                },
+                {
+                    type: 'pie',
+                    radius: '10%',
+                    center: ['40%', '30%'],
+                    encode: {
+                        itemName: 'product',
+                        value: '2013'
+                    }
+                },
+                {
+                    type: 'pie',
+                    radius: '10%',
+                    center: ['60%', '30%'],
+                    encode: {
+                        itemName: 'product',
+                        value: '2014'
+                    }
+                },
+                {
+                    type: 'pie',
+                    radius: '10%',
+                    center: ['80%', '30%'],
+                    encode: {
+                        itemName: 'product',
+                        value: '2015'
+                    }
+                }
+            ]
+        };
+        // 动态设置图表容器的高度
+        //const chartHeight = option.series.length * 1000; // 每个饼图400px高
+        //chartDom.style.height = chartHeight + 'px';
+
+        if (option && typeof option === 'object') {
+            myChart.setOption(option);
+        }
+
+        window.addEventListener('resize', myChart.resize);
+    </script>
+</body>
+
+</html>
